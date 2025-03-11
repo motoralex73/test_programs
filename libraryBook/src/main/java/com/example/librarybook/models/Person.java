@@ -34,7 +34,8 @@ public class Person {
     private List<Book> books;
 
     // Конструктор по умолчанию нужен для Spring
-    public Person() {  }
+    public Person() {
+    }
 
     public Person(String fullName, int yearOfBirth) {
         this.fullName = fullName;

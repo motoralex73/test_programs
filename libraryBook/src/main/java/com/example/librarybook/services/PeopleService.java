@@ -73,8 +73,7 @@ public class PeopleService {
             });
 
             return person.get().getBooks();
-        }
-        else {
+        } else {
             return Collections.emptyList();
         }
     }

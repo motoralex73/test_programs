@@ -39,7 +39,8 @@ public class Book {
     @Transient
     private boolean expired; // Hibernate не будет замечать этого поля, что нам и нужно. По-умолчанию false.
 
-    public Book() {  }
+    public Book() {
+    }
 
     public Book(String title, String author, int year) {
         this.title = title;

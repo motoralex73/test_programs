@@ -9,7 +9,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 
-
 @Component
 public class PersonValidator implements Validator {
 
@@ -30,10 +29,9 @@ public class PersonValidator implements Validator {
         Person person = (Person) o;
         try {
             peopleService.loadUserByUsername(person.getFullName());
-        }
-        catch (UsernameNotFoundException ignored) {
+        } catch (UsernameNotFoundException ignored) {
             return; //пользователь с таким именем не найден
         }
-        errors.rejectValue("username","Человек с таким именем уже существует");
+        errors.rejectValue("username", "Человек с таким именем уже существует");
     }
 }
