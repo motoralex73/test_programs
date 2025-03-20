@@ -1,8 +1,12 @@
 package com.user.restuser.service;
 
+import com.user.restuser.exception.UserExistEmailException;
+import com.user.restuser.exception.UserNotFoundException;
 import com.user.restuser.model.Users;
 import com.user.restuser.repo.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.user.restuser.response.ResponseHandler;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,20 +22,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long save(Users user) {
-        userRepo.save(user);
-        return user.getId();
+    public ResponseEntity<Object> save(Users user) {
+        Long id = userRepo.save(user).getId();
+        return ResponseHandler.responseBuilder("user was saved", HttpStatus.OK, id);
     }
 
     @Override
-    public Users findById(Long id) {
-        //return new Users(id,"a", "b", "c", "d", "e");//userRepo.findById(id).get();
-        return userRepo.findById(id).get();
+    public ResponseEntity<Object> findById(Long id) {
+        if (!userRepo.findById(id).isPresent()) throw new UserNotFoundException("User does not exist");
+        return ResponseHandler.responseBuilder("user find", HttpStatus.OK, userRepo.findById(id).get());
     }
 
     @Override
-    public Map<String, String> updateUser(Long id) {
+    public ResponseEntity<Object> updateUser(Long id) {
         System.out.println("service / updateUser");
+        if (!userRepo.findById(id).isPresent()) throw new UserNotFoundException("User EPTA does not exist");
         Users user = userRepo.findById(id).get();
         Map<String, String> updateResponse = new HashMap<>();
         updateResponse.put("id", user.getId().toString());
@@ -44,6 +49,6 @@ public class UserServiceImpl implements UserService {
         }
         updateResponse.put("current status", user.getStatus());
         userRepo.save(user);
-        return updateResponse;
+        return ResponseHandler.responseBuilder("user was update", HttpStatus.OK, updateResponse);
     }
 }

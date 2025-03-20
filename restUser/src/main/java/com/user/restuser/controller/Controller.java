@@ -3,6 +3,7 @@ package com.user.restuser.controller;
 import com.user.restuser.model.Users;
 import com.user.restuser.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -20,23 +21,23 @@ public class Controller {
     }
 
     @GetMapping("/{userId}")
-    public Users getUsers(@PathVariable String userId) {
-        Long id = Long.parseLong(userId);//Integer.parseInt(userId);
+    public ResponseEntity<Object> getUsers(@PathVariable String userId) {
+        Long id = Long.parseLong(userId);
         System.out.println("get mapping getUser = " + id);
         return userService.findById(id);
     }
 
     //добавить нового пользователя, id не нужен
     @PostMapping
-    public long addUser(@RequestBody Users user) {
+    public ResponseEntity<Object> addUser(@RequestBody Users user) {
         System.out.println("postMapping addUser");
         return userService.save(user);
     }
 
     //изменить статус пользователя
     @PutMapping("/{userId}")
-    public Map<String, String> updateUserStatus(@PathVariable String userId) {
-        System.out.println("PUT SUKA MAPPING");
+    public ResponseEntity<Object> updateUserStatus(@PathVariable String userId) {
+        System.out.println("PUT MAPPING");
         return userService.updateUser(Long.parseLong(userId));
     }
 }
