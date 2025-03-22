@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RestUserApplication {
 
     public static void main(String[] args) {
-        System.out.println("hello");
         SpringApplication.run(RestUserApplication.class, args);
+        System.out.println("start Rest User App");
     }
 
 }

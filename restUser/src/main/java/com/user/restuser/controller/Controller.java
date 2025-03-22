@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @AllArgsConstructor
 @RestController
 @RequestMapping("/user")
@@ -17,7 +15,7 @@ public class Controller {
 
     @GetMapping
     public Users getOne() {
-        return new Users(1L,"he","sds","asdas","asss","111");
+        return new Users(1L,"Aturov","Alex","loh@mail.ru","epta","123");
     }
 
     @GetMapping("/{userId}")
