@@ -1,7 +1,7 @@
 package patterns;
 
-public class PatternsSingelton {
-
+//Паттерн Синглтон, создает ссылки на один и тот же объект в памяти
+class PatternsSingelton {
     static class Singelton {
         int i = 0;
         static Singelton singelton = new Singelton();
@@ -18,5 +18,5 @@ public class PatternsSingelton {
         singelton.i = 100;
         System.out.println(singelton1.i);
     }
-
 }
+
