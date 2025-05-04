@@ -332,8 +332,8 @@ public static void studySet() {
 }
 
 //11. Inner-классы (внутренние классы)
-private int ppp=123;
-class Inner{
+private int ppp = 123;
+class Inner {
     private int k = 10;
     void show() {
         System.out.println(ppp);

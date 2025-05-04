@@ -5,7 +5,8 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.function.IntConsumer;
 import java.util.stream.Stream;
 
-//Метод, без имени, записанный коротким способом. Синтаксическая конструкция, используемая для создания анонимных функций на лету.
+//Метод, без имени, записанный коротким способом.
+//Синтаксическая конструкция, используемая для создания анонимных функций на лету.
 public class Lambda {
     Runnable r = new Runnable() {
         @Override
