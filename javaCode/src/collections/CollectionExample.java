@@ -36,10 +36,8 @@ public class CollectionExample {
         Queue q = new PriorityQueue();  //очередь
         Map m = new HashMap();          //словарь
         //неупорядоченные, упорядоченные и отсортированные (когда задаем алгоритм сортировки)
-        Stack<Integer> stack = new Stack<>();
-
-
-
+        Stack<Integer> stack = new Stack<>(); //vector
+        
         l.add(1);
         l.set(0,11);
         for (int i=10;i>=0;i--) l.add(0, i);
