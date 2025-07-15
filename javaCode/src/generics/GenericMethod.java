@@ -7,8 +7,8 @@ public class GenericMethod<T extends Comparable & Serializable> {
 
     T var;
     //Generic method
-    static <T,U> T method(T type) {
-        System.out.println("method "+type);
+    static <T,U> T method(T type, U user) {
+        System.out.println("method = " + type + ", user = " + user);
         return type;
     }
 
@@ -54,12 +54,12 @@ public class GenericMethod<T extends Comparable & Serializable> {
     public static void main(String[] args) {
 
         Cell<String> c = new Cell<>();
-        System.out.println(c.getE("This string get number = "+new Integer(5)));
+        System.out.println(c.getE("This string get number = " + new Integer(5)));
 
         Cell<String> cConst = new Cell<>(new Main());
         CellJob<JobClass> cj = new CellJob<>();
 
-        method("hello");
+        method("simple", "alex");
 
         GenericMethod<Car> m = new GenericMethod();
         m.var = new Car() {

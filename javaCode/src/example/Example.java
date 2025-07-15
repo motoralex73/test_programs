@@ -37,12 +37,12 @@ public class Example {
 
     static void checkMassive() {
 
-        int m1[] = {1,2,3,4,5,6,7,8}; //true
-        int m2[] = {15,9,6,4,1};      //true
-        int m3[] = {12,15,17};        //true
-        int m4[] = {55,6,4,25};       //false
+        int[] m1 = {1,2,3,4,5,6,7,8}; //true
+        int[] m2 = {15,9,6,4,1};      //true
+        int[] m3 = {12,15,17};        //true
+        int[] m4 = {55,6,4,25};       //false
 
-        System.out.println("check = "+check(m4));
+        System.out.println("check = " + check(m4));
     }
 
     static void plus2List() {

@@ -1,14 +1,11 @@
 package collections;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 //Колекция список
 public class CollectionList {
 
-    public static void main(String[] args) {
-
+    static void ex() {
         List arrayList = new ArrayList();
         List linkedList = new LinkedList();
 
@@ -19,9 +16,10 @@ public class CollectionList {
         System.out.println(objects);
 
         arrayList.add(1);
+        arrayList.add(1);
         arrayList.add(new Object());
         arrayList.add(null);
-        System.out.println("has null and add new null = "+arrayList.add(null));
+        System.out.println("has null and add new null = " + arrayList.add(null));
         //addAll добавляет 2 коллекцию к 1й (совмещая их), а add - добавляет 2ю колекцию как следующий элемент к 1й коллекции
         arrayList.addAll(List.of(1,2,3,4,5,6,7,7,7));
 
@@ -31,9 +29,17 @@ public class CollectionList {
         linkedList.add(777);
         linkedList.add(new Object());
         linkedList.add(null);
-        linkedList.add(arrayList);
-        System.out.println(linkedList);
+        linkedList.addAll(arrayList);
 
+        System.out.println("Список до : " + linkedList);
+        System.out.println(linkedList.get(1));
+        linkedList.remove(1);
+        System.out.println(linkedList.get(1));
+        System.out.println("Список после : " + linkedList);
+
+        Collections.sort(linkedList);
+
+        System.out.println(linkedList);
 
         class Hello { //inner class
             String hello;
@@ -48,5 +54,19 @@ public class CollectionList {
         Hello hello = new Hello();
         hello.sayHello("HELLO");
         hello.printHello();
+    }
+
+    static void ex_2() {
+        List list = new ArrayList();
+        list.addAll(List.of(7,2,3,4,1));
+        Collections.sort(list);
+        System.out.println(list);
+    }
+
+    public static void main(String[] args) {
+
+        ex();
+        ex_2();
+
     }
 }

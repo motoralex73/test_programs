@@ -1,4 +1,4 @@
-package book_tasks.chapter_1;
+package book_example.chapter_1;
 
 //подсчет повторяющихся символов
 public class Task_1 {

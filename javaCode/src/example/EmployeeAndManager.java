@@ -30,7 +30,6 @@ public class EmployeeAndManager {
         private int wages;
     }
 
-
     static class AnyClass {
         protected int aProtected;
         private int aPrivate;
@@ -40,13 +39,9 @@ public class EmployeeAndManager {
         boolean thisChild;
     }
 
-
     public static void main(String[] args) {
 
         //Employee employee = new Employee(new Manager(new Intern()));
-
-
-
 
         AnyClass anyChild = new AnyClass();
         anyChild.aPrivate = 123;

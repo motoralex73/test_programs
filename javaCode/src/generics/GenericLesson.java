@@ -14,6 +14,10 @@ public class GenericLesson {
             this.t = t;
             System.out.println(t);
         }
+
+        public void show() {
+            System.out.println("show type object = " + t.getClass().getName());
+        }
     }
 
     public static class CellObject {
@@ -50,14 +54,12 @@ public class GenericLesson {
     }
 
     class One<T> implements GenericInterface {
-        @Override
         public Object getT() {
             return null;
         }
     }
 
     class Two implements GenericInterface<String> {
-        @Override
         public String getT() {
             return null;
         }
@@ -67,6 +69,7 @@ public class GenericLesson {
         Cell<String> cell = new Cell<>();
         cell.setT("HELLO");
         String s = cell.getT();
+        cell.show();
         System.out.println(s+", my friend");
 
         CellObject cellObject = new CellObject();

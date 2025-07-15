@@ -27,7 +27,5 @@ public class ThreadBlockingQueue {
                 queue.add("This is string");
             }
         }.start();
-
     }
-
 }

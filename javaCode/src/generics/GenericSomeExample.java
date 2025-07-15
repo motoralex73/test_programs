@@ -44,7 +44,7 @@ public class GenericSomeExample {
             lst.add(new File("/abs/hello.dat"));
             System.out.println(lst.toString());
 
-            List<Parent> p = new ArrayList();
+            List<Parent> p = new ArrayList<>();
             Parent p1 = new Parent();
             p1.setName(se.var);
             p.add(p1);

@@ -21,6 +21,4 @@ public class ThreadAtomicExample {
         Thread.sleep(1000);
         System.out.println(atomicInteger);
     }
-
-
 }

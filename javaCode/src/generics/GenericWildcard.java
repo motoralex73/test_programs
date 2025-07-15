@@ -24,6 +24,8 @@ public class GenericWildcard {
         cell.setT(new Accord());
 
         Cell<? extends Car> cell2 = new Cell<Car>();
-       // Honda h = new cell2.getT();
+        Honda h = new Honda();
+        System.out.println(cell2.getClass());
+        System.out.println(h.getClass());
     }
 }

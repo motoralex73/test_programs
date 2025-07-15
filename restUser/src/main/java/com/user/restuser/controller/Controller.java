@@ -13,8 +13,9 @@ public class Controller {
 
     UserService userService;
 
-    @GetMapping
+    @GetMapping("/one")
     public Users getOne() {
+        System.out.println("Get mapping one");
         return new Users(1L,"Aturov","Alex","loh@mail.ru","epta","123");
     }
 

@@ -39,11 +39,8 @@ public class ThreadCyclicBarrier {
     public static void main(String[] args) {
 //ограничение количества потоков
         CyclicBarrier cyclicBarrier = new CyclicBarrier(3, new Run());
-
         new Sportsman(cyclicBarrier);
         new Sportsman(cyclicBarrier);
         new Sportsman(cyclicBarrier);
-
-
     }
 }

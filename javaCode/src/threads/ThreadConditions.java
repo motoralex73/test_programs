@@ -11,7 +11,6 @@ public class ThreadConditions {
     static int account = 0;
 
     static class AccountPlus extends Thread {
-        @Override
         public void run() {
             lock.lock();
             account += 10;
@@ -21,7 +20,6 @@ public class ThreadConditions {
     }
 
     static class AccountMinus extends Thread {
-        @Override
         public void run() {
             if (account < 10) {
                 try {
@@ -42,8 +40,6 @@ public class ThreadConditions {
     public static void main(String[] args) {
         new AccountMinus().start();
         new AccountPlus().start();
-
-
     }
 
 

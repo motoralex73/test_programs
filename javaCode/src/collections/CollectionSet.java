@@ -34,6 +34,8 @@ public class CollectionSet {
         linkedSet.add("her");
         linkedSet.add(1);
         System.out.println("linked set = " + linkedSet);
+        //NavigableSet ns = (NavigableSet) linkedSet;
+        //System.out.println(ns.lower(1));
 
         List<Integer> list = List.of(1,2,3,4,5,6,7);
         System.out.println(list);

@@ -10,7 +10,7 @@ public class CollectionDictionary {
         LinkedList iterable = new LinkedList();
         iterable.addLast("1");
         iterable.addLast(2);
-        System.out.println(iterable);
+        for (Object i : iterable) System.out.println(i);
 
 
     }
