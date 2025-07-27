@@ -6,7 +6,7 @@ public class FindDuplicateDigits {
 
     public static void main(String[] args) {
         Map<Integer, Integer> duplicate = new HashMap<>();
-        Integer count = 1;
+        int count = 1;
         for (int i = 0; i < mas.length; i++) {
             if (i > 0 && mas[i] == mas[i-1]) {
                 duplicate.put(mas[i], ++count);
