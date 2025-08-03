@@ -13,13 +13,38 @@ Output: 49
 Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area
 * of water (blue section) the container can contain is 49.
 Example 2:
-
 Input: height = [1,1]
 Output: 1
 * */
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Vector;
+
 public class N11_ContainerWithMostWater {
+
     public static void main(String[] args) {
 
+        int[] arr = {1,8,6,2,5,4,8,3,7};
+        int s = 0;
+
+        Vector<Integer> vec = new Vector<>();
+        for (int j = 0; j <= arr.length-2; j++) {
+            for (int i = j; i < arr.length-1; i++) {
+                if(arr[j] < arr[i+1])
+                    s = arr[j]*(i+1-j);
+                if(arr[j] > arr[i+1])
+                    s = arr[i+1]*(i+1-j);
+                vec.add(s);
+            }
+        }
+
+        var list = new ArrayList<>(vec);
+        for(var elem : vec){
+            System.out.println("vec= "+elem);
+        }
+
+        Collections.sort(list);
+        System.out.println("Max value of BlueWaterBox= "+ list.getLast());
     }
 }

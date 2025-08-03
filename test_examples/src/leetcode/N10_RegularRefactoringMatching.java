@@ -27,7 +27,9 @@ Explanation: ".*" means "zero or more (*) of any character (.)".
 * */
 
 public class N10_RegularRefactoringMatching {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        String s = String.valueOf("aaabb".matches("a*b*"));
+        System.out.println(s);
     }
 }

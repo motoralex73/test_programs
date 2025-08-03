@@ -11,6 +11,11 @@ And then read line by line: "PAHNAPLSIIGYIR"
 Write the code that will take a string and make this conversion given a number of rows:
 string convert(string s, int numRows);
 
+Строка «PAYPALISHIRING» написана зигзагообразным образцом на заданном числе строк, например:
+(для лучшей разборчивости можно отобразить этот узор фиксированным шрифтом)
+Запишите код, который будет принимать строку, и выполните это преобразование, указав количество строк:
+преобразование строки (строка s, int numRows);
+
 Example 1:
 
 Input: s = "PAYPALISHIRING", numRows = 3
@@ -33,6 +38,8 @@ Output: "A"
 
 public class N6_ZigzagConversion {
     public static void main(String[] args) {
+
+
 
     }
 }

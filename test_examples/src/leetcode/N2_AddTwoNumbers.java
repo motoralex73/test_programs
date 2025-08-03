@@ -26,11 +26,9 @@ public class N2_AddTwoNumbers {
 
     static public long returnDigit(LinkedList<Integer> list) {
         long result = 0;
-
         for (int i = 0; i < list.size(); i++) {
             result += (long) (list.get(i) * pow(10, i));
         }
-
         return result;
     }
 
@@ -51,9 +49,7 @@ public class N2_AddTwoNumbers {
         var l2 = new LinkedList<>(List.of(5,6,4));
 
         System.out.println(returnDigit(l1) + " " + returnDigit(l2));
-
         long sum = returnDigit(l1) + returnDigit(l2);
-
         System.out.println(returnList(sum));
     }
 }

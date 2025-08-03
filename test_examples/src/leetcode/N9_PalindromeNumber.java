@@ -24,5 +24,11 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 public class N9_PalindromeNumber {
     public static void main(String[] args) {
 
+        int d = 123321;
+        String s = String.valueOf(d);
+        for (int i=0, j=s.length()-1; i<s.length()/2;i++,j--) {
+            if (s.charAt(i) != s.charAt(j)) {System.out.println("dont palindrome"); return;}
+        }
+        System.out.println("Ok palindrome");
     }
 }

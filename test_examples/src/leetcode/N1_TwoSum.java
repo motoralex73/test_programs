@@ -32,7 +32,7 @@ public class N1_TwoSum {
     }
 
     public static void main(String[] args) {
-        int[] array = {2,5,3,6};
+        int[] array = {2,5,3,7,0,6};
         int target = 11;
         System.out.println(Arrays.toString(twoSum(array, target)));
 

@@ -14,7 +14,7 @@ C	100
 D	500
 M	1000
 Roman numerals are formed by appending the conversions of decimal place values from highest to lowest. Converting
-* a decimal place value into a Roman numeral has the following rules:
+a decimal place value into a Roman numeral has the following rules:
 
 If the value does not start with 4 or 9, select the symbol of the maximal value that can be subtracted from the
 * input, append that symbol to the result, subtract its value, and convert the remainder to a Roman numeral.
@@ -25,49 +25,72 @@ Only powers of 10 (I, X, C, M) can be appended consecutively at most 3 times to 
 * append 5 (V), 50 (L), or 500 (D) multiple times. If you need to append a symbol 4 times use the subtractive form.
 Given an integer, convert it to a Roman numeral.
 
-
-
-Example 1:
-
+* Example 1:
 Input: num = 3749
-
 Output: "MMMDCCXLIX"
-
 Explanation:
-
 3000 = MMM as 1000 (M) + 1000 (M) + 1000 (M)
  700 = DCC as 500 (D) + 100 (C) + 100 (C)
   40 = XL as 10 (X) less of 50 (L)
    9 = IX as 1 (I) less of 10 (X)
 Note: 49 is not 1 (I) less of 50 (L) because the conversion is based on decimal places
-Example 2:
 
+* Example 2:
 Input: num = 58
-
 Output: "LVIII"
-
 Explanation:
-
 50 = L
  8 = VIII
-Example 3:
 
+* Example 3:
 Input: num = 1994
-
 Output: "MCMXCIV"
-
 Explanation:
-
 1000 = M
  900 = CM
   90 = XC
    4 = IV
-
 * */
 
 
-public class N12_IntegerToRoman {
-    public static void main(String[] args) {
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+public class N12_IntegerToRoman {
+
+        public static String intToRoman(int num) {
+
+            Map<Integer, String> romanNumerals = new LinkedHashMap<>();
+            romanNumerals.put(1000, "M");
+            romanNumerals.put(900, "CM");
+            romanNumerals.put(500, "D");
+            romanNumerals.put(400, "CD");
+            romanNumerals.put(100, "C");
+            romanNumerals.put(90, "XC");
+            romanNumerals.put(50, "L");
+            romanNumerals.put(40, "XL");
+            romanNumerals.put(10, "X");
+            romanNumerals.put(9, "IX");
+            romanNumerals.put(5, "V");
+            romanNumerals.put(4, "IV");
+            romanNumerals.put(1, "I");
+
+            StringBuilder result = new StringBuilder();
+
+            // Iterate over each value-symbol pair in the map
+            for (Map.Entry<Integer, String> entry : romanNumerals.entrySet()) {
+                int value = entry.getKey();
+                while (num >= value) {  // While the number is greater than or equal to the current Roman numeral value
+                    result.append(entry.getValue());  // Append the corresponding symbol to the result
+                    num -= value;  // Subtract the value from the number
+                }
+            }
+            return result.toString();  // Return the final Roman numeral representation as a string
+        }
+
+        public static void main(String[] args) {
+            int testNum = 1987;
+            String romanRepresentation = intToRoman(testNum);
+            System.out.println("The Roman numeral representation of " + testNum + " is: " + romanRepresentation);
+        }
     }
-}
