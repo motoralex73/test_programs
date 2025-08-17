@@ -19,6 +19,5 @@ public class LocalDateClass {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MM yyyy");
         System.out.println(localDate.format(dateTimeFormatter));
-
     }
 }

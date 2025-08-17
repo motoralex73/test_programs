@@ -6,7 +6,7 @@ import java.util.*;
 public class Example {
 
     static void add() {
-        char ch[] = {0x47, 0x75, 0x6c, 0x6e, 0x61, 0x7a};
+        char[] ch = {0x47, 0x75, 0x6c, 0x6e, 0x61, 0x7a};
         System.out.println(ch);
 
         String str = "Hello";

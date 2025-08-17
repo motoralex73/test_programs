@@ -5,7 +5,6 @@ public class PatternsDAO {
 
     interface Data {
         String getData();
-
     }
 
     static class Database implements Data {

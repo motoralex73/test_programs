@@ -19,11 +19,15 @@ public class CollectionExample {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        int[] array = new int[15];
-        array[0] = 1;
-        ArrayList<Integer> arrays = new ArrayList();
+        int[] arr = new int[15];
+        arr[0] = 1;
+        out.println(arr[0]);
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        linkedList.add(111);
+        out.println("element = " + linkedList.element());
+        ArrayList<Integer> arrays = new ArrayList<>(100);
         Collections collections;
-        Collection collection = new ArrayList();
+        Collection<Integer> collection = new ArrayList<>();
         collection.add(1);
         collection.add(2);
         collection.add(3);
@@ -31,17 +35,16 @@ public class CollectionExample {
         for (Object o : collection) out.print(o+"; "); out.println("\n");
 
         // Collections
-        List l = new ArrayList();       //список
-        Set s = new LinkedHashSet();    //множество, Linked - сохраняет порядок, другие сортируют по порядку
-        Queue q = new PriorityQueue();  //очередь
-        Map m = new HashMap();          //словарь
+        List<Object> l = new ArrayList<>();       //список
+        Set<Object> s = new LinkedHashSet<>();    //множество, Linked - сохраняет порядок, другие сортируют по порядку
+        Queue<Object> q = new PriorityQueue<>();  //очередь
+        Map<Object,Object> m = new HashMap<>();          //словарь
         //неупорядоченные, упорядоченные и отсортированные (когда задаем алгоритм сортировки)
         Stack<Integer> stack = new Stack<>();
-
         l.add(1);
         l.set(0,11);
         for (int i=10;i>=0;i--) l.add(0, i);
-        out.println(l);
+        out.println("list = "+l);
 
         for (int i=0;i<10;i++) q.offer(i);
         out.println(q);
@@ -67,7 +70,7 @@ public class CollectionExample {
 
         int[] massive = new int[15];
         out.println("size of massive = "+massive.length);
-        int initMassive[] = {1,2,3,4,5,6,7};
+        int[] initMassive = {1,2,3,4,5,6,7};
         for(int i=0;i<initMassive.length;i++) {
             out.print(initMassive[i]);
             Thread.sleep(i*100);
@@ -87,12 +90,11 @@ public class CollectionExample {
         out.println(sss);
 
         int[][] matrix = { {1,2,3,4}, {5,6}, {7,8,9}};
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++ ) {
-                out.print(matrix[i][j]+" ");
+        for (int[] ints : matrix) {
+            for (int anInt : ints) {
+                out.print(anInt + " ");
             }
             out.println();
         }
-
     }
 }

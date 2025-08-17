@@ -11,5 +11,4 @@ public class CollectionManyMethod {
         Collections.sort(ns);
         System.out.println(ns);
     }
-
 }

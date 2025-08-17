@@ -12,14 +12,12 @@ Explanation: merged array = [1,2,3] and median is 2.
 * */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class N4_MedianOfTwoSortedArrays {
     public static void main(String[] args) {
-        int[] a = { 1, 2, 13, 14, 5, 6, 7, 8, 9 };
-        int[] b = { 1, 2, 3, 4, 5, 16, 7, 8, 19 };
+        int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        int[] b = { 1, 2, 3, 4, 5, 6, 7, 8, 19 };
 
         double medianSumOfTwoArrays = 0.0;
         var arrayList = new ArrayList<Integer>();

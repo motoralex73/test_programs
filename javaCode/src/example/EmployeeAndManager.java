@@ -5,20 +5,14 @@ public class EmployeeAndManager {
 
     //устанавливает и смотрит
     static class Employee {
-
         Manager manager;
-
         public Employee(Manager manager) {
             this.manager = manager;
         }
-
-
     }
     //только смотрит
     static class Manager {
-
         Intern intern;
-
         public Manager(Intern intern) {
             this.intern = intern;
         }

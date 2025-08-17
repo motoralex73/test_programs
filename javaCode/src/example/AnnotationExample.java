@@ -12,7 +12,6 @@ public class AnnotationExample {
         int val() default 1000;
     }
 
-    //@Anno()
     @Anno(str = "Пример аннотации", val = 100)
     public static void func() {
         try {

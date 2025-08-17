@@ -64,9 +64,7 @@ public class CollectionList {
     }
 
     public static void main(String[] args) {
-
         ex();
         ex_2();
-
     }
 }

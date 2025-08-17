@@ -29,7 +29,7 @@ public class ParallelExample {
         long t2 = new Date().getTime();
         System.out.println(t2 - t1);
 
-        //параллельный стрим делает операции в произвольном порядке, например, распечатать в парал.стриме данные, то они будут в радномном порядке.
+        //параллельный стрим делает операции в произвольном порядке, например, распечатать в парал.стриме данные, то они будут в рандомном порядке.
         List<Integer> list = new ArrayList<>();
         for (int i=0;i<10000;i++) list.add(i);
         list.parallelStream().forEach(x -> System.out.println(x));

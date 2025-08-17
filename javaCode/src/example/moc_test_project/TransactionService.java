@@ -1,11 +1,9 @@
 package example.moc_test_project;
 
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;

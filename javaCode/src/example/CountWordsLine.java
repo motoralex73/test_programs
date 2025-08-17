@@ -7,8 +7,7 @@ public class CountWordsLine {
 
         String clearString = str.replaceAll("[\\p{Punct}]", "");
         String[] words = clearString.trim().split("\\s+");
-        int count = words.length;
-        return count;
+        return words.length;
     }
 
     public static void main(String[] args) {

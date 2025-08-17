@@ -19,7 +19,6 @@ public class PatternsFacade {
         }
     }
 
-
     public static void main(String[] args) throws IOException {
 
         FileReadFacade fileReadFacade = new FileReadFacade();

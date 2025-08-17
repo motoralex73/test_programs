@@ -5,9 +5,9 @@ import java.util.*;
 public class CollectionMap {
 
     public static void main(String[] args) {
-        Map hashMap = new HashMap();
-        Map linkedMap = new LinkedHashMap();
-        Map treeMap = new TreeMap();
+        Map hashMap = new HashMap<>();
+        Map linkedMap = new LinkedHashMap<>();
+        Map treeMap = new TreeMap<>();
 
         Map<String, String> map = Map.of("1","one", "2", "two");
         System.out.println(map.get("1"));

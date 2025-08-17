@@ -17,7 +17,6 @@ Explanation: There is no common prefix among the input strings.
 
 * */
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;

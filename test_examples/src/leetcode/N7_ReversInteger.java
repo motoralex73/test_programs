@@ -17,7 +17,6 @@ Output: -321
 Example 3:
 Input: x = 120
 Output: 21
-
 * */
 
 public class N7_ReversInteger {
@@ -26,24 +25,20 @@ public class N7_ReversInteger {
         int digit = -23423400;
         boolean haveMinus = false;
 
+        System.out.println("before = "+digit);
         if (digit < 0) {
             digit = Math.abs(digit);
             haveMinus = true;
         }
 
-        String s = String.valueOf(digit);
-        StringBuilder sRevers = new StringBuilder();
-
-        for (int i = s.length()-1; i >= 0; i--) {
-            sRevers.append(s.charAt(i));
-        }
-
-        System.out.println(sRevers);
+        StringBuilder sRevers = new StringBuilder(String.valueOf(digit));
+        sRevers.reverse();
+        //System.out.println(sRevers);
         digit = Integer.parseInt(String.valueOf(sRevers));
 
         if (haveMinus) {
             digit *= -1;
         }
-        System.out.println(digit);
+        System.out.println("after = "+digit);
     }
 }

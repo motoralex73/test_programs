@@ -1,12 +1,12 @@
 package example.moc_test_project;
 
-import org.springframework.stereotype.Repository;
+//import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
 public class TransactionRepositoryImpl implements TransactionRepository {
 
     private final List<Transaction> transactions = new ArrayList<>();
