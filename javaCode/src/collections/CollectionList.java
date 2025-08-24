@@ -6,7 +6,7 @@ import java.util.*;
 public class CollectionList {
 
     static void ex() {
-        List arrayList = new ArrayList();
+        List<Object> arrayList = new ArrayList();
         List linkedList = new LinkedList();
 
         List<Object> objects = new ArrayList<>();
