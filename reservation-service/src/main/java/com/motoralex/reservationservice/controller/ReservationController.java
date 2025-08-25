@@ -66,4 +66,13 @@ public class ReservationController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @PostMapping("/{id}/approved")
+    public ResponseEntity<Reservation> approveReservation(@PathVariable("id") Long id) {
+        log.info("Approve reservation: id = " + id);
+
+        var reservation = reservationService.approveReservation(id);
+
+        return ResponseEntity.ok(reservation);
+    }
 }
