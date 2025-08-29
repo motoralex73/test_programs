@@ -1,6 +1,8 @@
 package com.motoralex.reservationservice.controller;
 
 import com.motoralex.reservationservice.repo.Reservation;
+import com.motoralex.reservationservice.repo.ReservationEntity;
+import com.motoralex.reservationservice.repo.ReservationStatus;
 import com.motoralex.reservationservice.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +25,10 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable("id") Long id) {
+    public ResponseEntity<ReservationEntity> getReservationById(@PathVariable("id") Long id) {
         log.info("Get reservation by id: " + id);
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(reservationService.findById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(reservationService.findReservationById(id));
         }
         catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
@@ -34,25 +36,24 @@ public class ReservationController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Reservation>> getAllReservations() {
+    public ResponseEntity<List<ReservationEntity>> getAllReservations() {
         log.info("Get all reservations");
         return ResponseEntity.ok(reservationService.findAllReservation());
     }
 
     @PostMapping()
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservationToCreate) {
-        log.info("Create reservation: " + reservationToCreate);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header("test-header","123")
-                .body(reservationService.createReservation(reservationToCreate));
+    public ResponseEntity<ReservationEntity> createReservation(@RequestBody ReservationEntity reservationToCreate) {
+        log.info("Create new reservation: " + reservationToCreate.toString());
+        reservationService.createReservation(reservationToCreate);
+        return ResponseEntity.ok(reservationToCreate);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable("id") Long id,
-                                                         @RequestBody Reservation reservationToUpdate) {
+    public ResponseEntity<ReservationEntity> updateReservation(@PathVariable("id") Long id,
+                                                         @RequestBody ReservationEntity reservationToUpdate) {
         log.info("Update reservation id = " + id + "reservationToUpdate = " + reservationToUpdate);
         var updated = reservationService.updateReservation(id, reservationToUpdate);
-        return ResponseEntity.ok((Reservation) updated);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
@@ -68,11 +69,11 @@ public class ReservationController {
     }
 
     @PostMapping("/{id}/approved")
-    public ResponseEntity<Reservation> approveReservation(@PathVariable("id") Long id) {
+    public ResponseEntity<ReservationEntity> approveReservation(@PathVariable("id") Long id) {
         log.info("Approve reservation: id = " + id);
 
-        var reservation = reservationService.approveReservation(id);
-
-        return ResponseEntity.ok(reservation);
+        //var reservation = reservationService.approveReservation(id);
+        //return ResponseEntity.ok(reservation);
+        return null;
     }
 }
