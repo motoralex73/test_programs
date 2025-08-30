@@ -22,6 +22,9 @@ public class ReservationService {
     }
 
     public List<ReservationEntity> findAllReservation() {
+
+        System.out.println(reservationRepository.findAllByReservationStatusIs(ReservationStatus.APPROVED));
+
         return reservationRepository.findAll();
     }
 
@@ -61,7 +64,7 @@ public class ReservationService {
         }
 
         var reservation = reservationRepository.findById(id).get();
-        if (reservationRepository.findById(id).orElseThrow().getReservation_status() != ReservationStatus.PENDING) {
+        if (reservationRepository.findById(id).orElseThrow().getReservationStatus() != ReservationStatus.PENDING) {
             throw new IllegalStateException("Cannot approve reservation with id " + id);
         }
 
@@ -70,7 +73,7 @@ public class ReservationService {
             throw new IllegalStateException("Cannot approve reservation because of conflict with id " + id);
         }
 
-        reservation.setReservation_status(ReservationStatus.APPROVED);
+        reservation.setReservationStatus(ReservationStatus.APPROVED);
         reservationRepository.save(reservation);
         return reservation;
     }
@@ -83,14 +86,14 @@ public class ReservationService {
             if (reservation.getId().equals(reservationEntity.getId())) {
                 continue;
             }
-            if (!reservation.getRoom_id().equals(reservationEntity.getRoom_id())) {
+            if (!reservation.getRoomId().equals(reservationEntity.getRoomId())) {
                 continue;
             }
-            if (!reservationEntity.getReservation_status().equals(ReservationStatus.APPROVED)) {
+            if (!reservationEntity.getReservationStatus().equals(ReservationStatus.APPROVED)) {
                 continue;
             }
-            if (reservation.getStart_date().isBefore(reservationEntity.getEnd_date()) &&
-                    reservationEntity.getStart_date().isBefore(reservation.getEnd_date())) {
+            if (reservation.getStartDate().isBefore(reservationEntity.getEndDate()) &&
+                    reservationEntity.getStartDate().isBefore(reservation.getEndDate())) {
                 return true;
             }
         }

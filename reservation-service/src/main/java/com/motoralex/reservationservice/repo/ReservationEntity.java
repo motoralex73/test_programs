@@ -14,31 +14,31 @@ public class ReservationEntity {
     private Long id;
 
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userId;
 
     @Column(name = "room_id")
-    private Long room_id;
+    private Long roomId;
 
     @Column(name = "start_date")
-    private LocalDateTime start_date;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private LocalDateTime end_date;
+    private LocalDateTime endDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "reservation_status")
-    private ReservationStatus reservation_status;
+    private ReservationStatus reservationStatus;
 
     public ReservationEntity() {
     }
 
-    public ReservationEntity(Long id, Long user_id, Long room_id, LocalDateTime start_date, LocalDateTime end_date, ReservationStatus reservation_status) {
+    public ReservationEntity(Long id, Long userId, Long roomId, LocalDateTime startDate, LocalDateTime endDate, ReservationStatus reservationStatus) {
         this.id = id;
-        this.user_id = user_id;
-        this.room_id = room_id;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.reservation_status = reservation_status;
+        this.userId = userId;
+        this.roomId = roomId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.reservationStatus = reservationStatus;
     }
 
     public Long getId() {
@@ -49,55 +49,43 @@ public class ReservationEntity {
         this.id = id;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getRoom_id() {
-        return room_id;
+    public Long getRoomId() {
+        return roomId;
     }
 
-    public void setRoom_id(Long room_id) {
-        this.room_id = room_id;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 
-    public LocalDateTime getStart_date() {
-        return start_date;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(LocalDateTime start_date) {
-        this.start_date = start_date;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDateTime getEnd_date() {
-        return end_date;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(LocalDateTime end_date) {
-        this.end_date = end_date;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
-    public ReservationStatus getReservation_status() {
-        return reservation_status;
+    public ReservationStatus getReservationStatus() {
+        return reservationStatus;
     }
 
-    public void setReservation_status(ReservationStatus reservation_status) {
-        this.reservation_status = reservation_status;
-    }
-
-    @Override
-    public String toString() {
-        return "ReservationEntity{" +
-                "id=" + id +
-                ", user_id=" + user_id +
-                ", room_id=" + room_id +
-                ", start_date=" + start_date +
-                ", end_date=" + end_date +
-                ", reservation_status=" + reservation_status +
-                '}';
+    public void setReservationStatus(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
     }
 }
