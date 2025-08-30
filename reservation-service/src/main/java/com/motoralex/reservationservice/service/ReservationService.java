@@ -3,6 +3,7 @@ package com.motoralex.reservationservice.service;
 import com.motoralex.reservationservice.repo.ReservationEntity;
 import com.motoralex.reservationservice.repo.ReservationRepository;
 import com.motoralex.reservationservice.repo.ReservationStatus;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
@@ -17,7 +18,7 @@ public class ReservationService {
     }
 
     public ReservationEntity findReservationById(Long id) {
-        return reservationRepository.findById(id).orElse(null);
+        return reservationRepository.findById(id).orElseThrow( () -> new EntityNotFoundException("Reservation with id " + id + " not found"));
     }
 
     public List<ReservationEntity> findAllReservation() {
@@ -29,18 +30,21 @@ public class ReservationService {
             reservationRepository.save(reservation);
     }
 
-    //@Transactional
+    @Transactional
     public ReservationEntity updateReservation(Long id, ReservationEntity reservationToUpdate) {
+
         if (id != null && reservationRepository.findById(id).isPresent()) {
             reservationToUpdate.setId(id);
             reservationRepository.save(reservationToUpdate);
             return reservationToUpdate;
         }
+        else System.err.println("Has not search update reservation");
         return null;
     }
 
-    //@Transactional
+    @Transactional
     public void deleteReservation(Long id) {
+
         if (reservationRepository.findById(id).isPresent()) {
             reservationRepository.deleteById(id);
         }
@@ -49,49 +53,48 @@ public class ReservationService {
         }
     }
 
-//    public Reservation approveReservation(Long id) {
-//
-//        if (!reservationMap.containsKey(id)) {
-//            throw new NoSuchElementException("Not found reservation with id " + id);
-//        }
-//
-//        var reservation = reservationMap.get(id);
-//        if (reservation.reservationStatus() != ReservationStatus.PENDING) {
-//            throw new IllegalStateException("Cannot approve reservation with id " + id);
-//        }
+    @Transactional
+    public ReservationEntity approveReservation(Long id) {
 
-//        var isConflict = isReservationConflict(reservation);
-//        if (isConflict) {
-//            throw new IllegalStateException("Cannot approve reservation because of conflict with id " + id);
-//        }
+        if (reservationRepository.findById(id).isEmpty()) {
+            throw new NoSuchElementException("Not found reservation with id " + id);
+        }
 
-//        var approvedReservation = new Reservation(
-//                reservation.id(),
-//                reservation.userId(),
-//                reservation.roomId(),
-//                reservation.startDate(),
-//                reservation.endDate(),
-//                ReservationStatus.APPROVED
-//        );
-//        reservationMap.put(id, approvedReservation);
-//        return approvedReservation;
-//    }
-//
-//    private boolean isReservationConflict(Reservation reservation) {
-//        for (Reservation e : reservationMap.values()) {
-//            if (reservation.id().equals(e.id())) {
-//                continue;
-//            }
-//            if (!reservation.roomId().equals(e.roomId())) {
-//                continue;
-//            }
-//            if (!e.reservationStatus().equals(ReservationStatus.APPROVED)) {
-//                continue;
-//            }
-//            if (reservation.startDate().isBefore(e.endDate()) && e.startDate().isBefore(reservation.endDate())) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+        var reservation = reservationRepository.findById(id).get();
+        if (reservationRepository.findById(id).orElseThrow().getReservation_status() != ReservationStatus.PENDING) {
+            throw new IllegalStateException("Cannot approve reservation with id " + id);
+        }
+
+        var isConflict = isReservationConflict(reservation);
+        if (isConflict) {
+            throw new IllegalStateException("Cannot approve reservation because of conflict with id " + id);
+        }
+
+        reservation.setReservation_status(ReservationStatus.APPROVED);
+        reservationRepository.save(reservation);
+        return reservation;
+    }
+
+    private boolean isReservationConflict(ReservationEntity reservation) {
+
+        var allReservations = reservationRepository.findAll();
+
+        for (ReservationEntity reservationEntity : allReservations) {
+            if (reservation.getId().equals(reservationEntity.getId())) {
+                continue;
+            }
+            if (!reservation.getRoom_id().equals(reservationEntity.getRoom_id())) {
+                continue;
+            }
+            if (!reservationEntity.getReservation_status().equals(ReservationStatus.APPROVED)) {
+                continue;
+            }
+            if (reservation.getStart_date().isBefore(reservationEntity.getEnd_date()) &&
+                    reservationEntity.getStart_date().isBefore(reservation.getEnd_date())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

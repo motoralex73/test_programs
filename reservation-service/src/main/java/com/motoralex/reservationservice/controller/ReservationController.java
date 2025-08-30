@@ -1,8 +1,6 @@
 package com.motoralex.reservationservice.controller;
 
-import com.motoralex.reservationservice.repo.Reservation;
 import com.motoralex.reservationservice.repo.ReservationEntity;
-import com.motoralex.reservationservice.repo.ReservationStatus;
 import com.motoralex.reservationservice.service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +49,7 @@ public class ReservationController {
     @PutMapping("/{id}")
     public ResponseEntity<ReservationEntity> updateReservation(@PathVariable("id") Long id,
                                                          @RequestBody ReservationEntity reservationToUpdate) {
-        log.info("Update reservation id = " + id + "reservationToUpdate = " + reservationToUpdate);
+        log.info("Update reservation id = " + id + " reservationToUpdate = " + reservationToUpdate);
         var updated = reservationService.updateReservation(id, reservationToUpdate);
         return ResponseEntity.ok(updated);
     }
@@ -71,9 +69,7 @@ public class ReservationController {
     @PostMapping("/{id}/approved")
     public ResponseEntity<ReservationEntity> approveReservation(@PathVariable("id") Long id) {
         log.info("Approve reservation: id = " + id);
-
-        //var reservation = reservationService.approveReservation(id);
-        //return ResponseEntity.ok(reservation);
-        return null;
+        var reservation = reservationService.approveReservation(id);
+        return ResponseEntity.ok(reservation);
     }
 }
