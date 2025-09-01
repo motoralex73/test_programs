@@ -1,7 +1,9 @@
 package com.motoralex.reservationservice.repo;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Null;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -11,18 +13,25 @@ public class ReservationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @Null
     private Long id;
 
     @Column(name = "user_id")
+    @NotNull
     private Long userId;
 
     @Column(name = "room_id")
+    @NotNull
     private Long roomId;
 
     @Column(name = "start_date")
+    @FutureOrPresent
+    @NotNull
     private LocalDateTime startDate;
 
     @Column(name = "end_date")
+    @FutureOrPresent
+    @jakarta.validation.constraints.NotNull
     private LocalDateTime endDate;
 
     @Enumerated(EnumType.STRING)

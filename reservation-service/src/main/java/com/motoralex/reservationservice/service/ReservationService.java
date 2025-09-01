@@ -3,7 +3,11 @@ package com.motoralex.reservationservice.service;
 import com.motoralex.reservationservice.repo.ReservationEntity;
 import com.motoralex.reservationservice.repo.ReservationRepository;
 import com.motoralex.reservationservice.repo.ReservationStatus;
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
@@ -12,6 +16,8 @@ import java.util.*;
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(ReservationService.class);
 
     public ReservationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
@@ -30,7 +36,11 @@ public class ReservationService {
 
     @Transactional
     public void createReservation(ReservationEntity reservation) {
-            reservationRepository.save(reservation);
+        if (reservation.getId() != null) {
+            throw new IllegalArgumentException("Reservation with id " + reservation.getId() + " already exists");
+        }
+
+        reservationRepository.save(reservation);
     }
 
     @Transactional

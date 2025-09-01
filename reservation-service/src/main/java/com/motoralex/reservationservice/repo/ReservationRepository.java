@@ -8,6 +8,7 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<ReservationEntity, Long> {
 
+    //custom methods to service layer
     List<ReservationEntity> findAllByUserId(Long id);
     List<ReservationEntity> findAllByReservationStatusIs(ReservationStatus reservationStatus);
 }

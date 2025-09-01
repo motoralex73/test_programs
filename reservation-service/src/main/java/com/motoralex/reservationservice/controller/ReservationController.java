@@ -2,6 +2,7 @@ package com.motoralex.reservationservice.controller;
 
 import com.motoralex.reservationservice.repo.ReservationEntity;
 import com.motoralex.reservationservice.service.ReservationService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class ReservationController {
     }
 
     @PostMapping()
-    public ResponseEntity<ReservationEntity> createReservation(@RequestBody ReservationEntity reservationToCreate) {
+    public ResponseEntity<ReservationEntity> createReservation(@RequestBody @Valid ReservationEntity reservationToCreate) {
         log.info("Create new reservation: " + reservationToCreate.toString());
         reservationService.createReservation(reservationToCreate);
         return ResponseEntity.ok(reservationToCreate);
