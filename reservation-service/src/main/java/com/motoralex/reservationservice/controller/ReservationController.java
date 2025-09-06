@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 public class ReservationController {
 
     private static final Logger log = Logger.getLogger(ReservationController.class.getName());
-
     private final ReservationService reservationService;
 
     public ReservationController(ReservationService reservationService) {
@@ -26,12 +25,7 @@ public class ReservationController {
     @GetMapping("/{id}")
     public ResponseEntity<ReservationEntity> getReservationById(@PathVariable("id") Long id) {
         log.info("Get reservation by id: " + id);
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(reservationService.findReservationById(id));
-        }
-        catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(reservationService.findReservationById(id));
     }
 
     @GetMapping()
@@ -58,13 +52,8 @@ public class ReservationController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable("id") Long id) {
         log.info("Delete reservation: id={}" + id);
-        try {
-            reservationService.deleteReservation(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-        catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        reservationService.deleteReservation(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PostMapping("/{id}/approved")

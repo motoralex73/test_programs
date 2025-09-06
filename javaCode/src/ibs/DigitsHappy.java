@@ -19,12 +19,5 @@ public class DigitsHappy {
         ExecutorService executorService = Executors.newFixedThreadPool(list.size());
         List<Future<Integer>> futures = list.stream().map(x -> executorService.submit(() -> sq(x))).toList();
         System.out.println(futures);
-
-
-
-
-
-
-
     }
 }
