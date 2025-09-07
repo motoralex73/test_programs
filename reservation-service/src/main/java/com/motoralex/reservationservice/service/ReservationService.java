@@ -30,29 +30,54 @@ public class ReservationService {
     public List<ReservationEntity> findAllReservation() {
 
         System.out.println(reservationRepository.findAllByReservationStatusIs(ReservationStatus.APPROVED));
-
         return reservationRepository.findAll();
     }
 
     @Transactional
     public void createReservation(ReservationEntity reservation) {
-        if (reservation.getId() != null) {
-            throw new IllegalArgumentException("Reservation with id " + reservation.getId() + " already exists");
+
+        if (!reservation.getEndDate().isAfter(reservation.getStartDate())) {
+            throw new IllegalArgumentException("Start date should be after end date");
         }
 
         reservationRepository.save(reservation);
+        logger.info("Reservation with id " + reservation.getId() + " created");
     }
 
     @Transactional
     public ReservationEntity updateReservation(Long id, ReservationEntity reservationToUpdate) {
 
-        if (id != null && reservationRepository.findById(id).isPresent()) {
-            reservationToUpdate.setId(id);
-            reservationRepository.save(reservationToUpdate);
-            return reservationToUpdate;
+        var reservationEntity = reservationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation with id " + id + " not found"));
+        if (!reservationEntity.getReservationStatus().equals(ReservationStatus.PENDING)) {
+            throw new IllegalArgumentException("Status should be pending");
         }
-        else System.err.println("Has not search update reservation");
-        return null;
+        if (!reservationToUpdate.getEndDate().isAfter(reservationToUpdate.getStartDate())) {
+            throw new IllegalArgumentException("Start date should be after end date");
+        }
+
+        reservationRepository.save(reservationToUpdate);
+        logger.info("Reservation with id " + reservationToUpdate.getId() + " updated");
+
+        return reservationToUpdate;
+    }
+
+    @Transactional
+    public void cancelReservation(Long id) {
+
+        var reservationEntity = reservationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation with id " + id + " not found"));
+
+        if (reservationEntity.getReservationStatus().equals(ReservationStatus.APPROVED)) {
+            throw new IllegalStateException("Reservation with id " + id + " already approved, please call manager");
+        }
+        if (reservationEntity.getReservationStatus().equals(ReservationStatus.CANCELLED)) {
+            throw new IllegalArgumentException("Reservation has status cancelled");
+        }
+
+        reservationEntity.setReservationStatus(ReservationStatus.CANCELLED);
+        reservationRepository.save(reservationEntity);
+        logger.info("Reservation with id " + id + " has been cancelled");
     }
 
     @Transactional

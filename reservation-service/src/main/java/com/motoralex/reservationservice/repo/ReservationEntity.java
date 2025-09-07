@@ -2,8 +2,8 @@ package com.motoralex.reservationservice.repo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +31,7 @@ public class ReservationEntity {
 
     @Column(name = "end_date")
     @FutureOrPresent
-    @jakarta.validation.constraints.NotNull
+    @NotNull
     private LocalDateTime endDate;
 
     @Enumerated(EnumType.STRING)
