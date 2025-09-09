@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -63,21 +65,22 @@ public class ReservationService {
     }
 
     @Transactional
-    public void cancelReservation(Long id) {
+    public ReservationEntity cancelReservation(Long id) {
 
-        var reservationEntity = reservationRepository.findById(id)
+        var reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Reservation with id " + id + " not found"));
 
-        if (reservationEntity.getReservationStatus().equals(ReservationStatus.APPROVED)) {
+        if (reservation.getReservationStatus().equals(ReservationStatus.APPROVED)) {
             throw new IllegalStateException("Reservation with id " + id + " already approved, please call manager");
         }
-        if (reservationEntity.getReservationStatus().equals(ReservationStatus.CANCELLED)) {
+        if (reservation.getReservationStatus().equals(ReservationStatus.CANCELLED)) {
             throw new IllegalArgumentException("Reservation has status cancelled");
         }
 
-        reservationEntity.setReservationStatus(ReservationStatus.CANCELLED);
-        reservationRepository.save(reservationEntity);
+        reservationRepository.setReservationStatus(id,ReservationStatus.CANCELLED);
         logger.info("Reservation with id " + id + " has been cancelled");
+
+        return reservationRepository.findById(id).orElseThrow();
     }
 
     @Transactional
@@ -99,11 +102,12 @@ public class ReservationService {
         }
 
         var reservation = reservationRepository.findById(id).get();
+
         if (reservationRepository.findById(id).orElseThrow().getReservationStatus() != ReservationStatus.PENDING) {
             throw new IllegalStateException("Cannot approve reservation with id " + id);
         }
 
-        var isConflict = isReservationConflict(reservation);
+        var isConflict = isReservationConflict(reservation.getRoomId(), reservation.getStartDate(), reservation.getEndDate());
         if (isConflict) {
             throw new IllegalStateException("Cannot approve reservation because of conflict with id " + id);
         }
@@ -113,26 +117,22 @@ public class ReservationService {
         return reservation;
     }
 
-    private boolean isReservationConflict(ReservationEntity reservation) {
+    private boolean isReservationConflict(
+            Long roomId,
+            LocalDateTime startDate,
+            LocalDateTime endDate
+    ) {
 
-        var allReservations = reservationRepository.findAll();
-
-        for (ReservationEntity reservationEntity : allReservations) {
-            if (reservation.getId().equals(reservationEntity.getId())) {
-                continue;
-            }
-            if (!reservation.getRoomId().equals(reservationEntity.getRoomId())) {
-                continue;
-            }
-            if (!reservationEntity.getReservationStatus().equals(ReservationStatus.APPROVED)) {
-                continue;
-            }
-            if (reservation.getStartDate().isBefore(reservationEntity.getEndDate()) &&
-                    reservationEntity.getStartDate().isBefore(reservation.getEndDate())) {
-                return true;
-            }
+        List<Long> conflictingIds = reservationRepository.findConflictReservationIds(
+                roomId,
+                startDate,
+                endDate,
+                ReservationStatus.APPROVED);
+        if (conflictingIds.isEmpty()) {
+            return false;
         }
-        return false;
+        logger.info("Conflicting reservation ids " + conflictingIds);
+        return true;
     }
 
 }

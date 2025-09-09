@@ -1,4 +1,4 @@
-package com.motoralex.reservationservice.repo;
+        package com.motoralex.reservationservice.repo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -12,30 +12,30 @@ import java.time.LocalDateTime;
 public class ReservationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, updatable = false)
     @Null
     private Long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false, unique = true)
     @NotNull
     private Long userId;
 
-    @Column(name = "room_id")
+    @Column(name = "room_id", nullable = false, unique = true)
     @NotNull
     private Long roomId;
 
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     @FutureOrPresent
     @NotNull
     private LocalDateTime startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date", nullable = false)
     @FutureOrPresent
     @NotNull
     private LocalDateTime endDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "reservation_status")
+    @Column(name = "reservation_status", nullable = false)
     private ReservationStatus reservationStatus;
 
     public ReservationEntity() {
@@ -96,5 +96,17 @@ public class ReservationEntity {
 
     public void setReservationStatus(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "ReservationEntity{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", roomId=" + roomId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", reservationStatus=" + reservationStatus +
+                '}';
     }
 }
