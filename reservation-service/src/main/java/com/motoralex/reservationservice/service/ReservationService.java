@@ -1,5 +1,6 @@
 package com.motoralex.reservationservice.service;
 
+import com.motoralex.reservationservice.availability.ReservationAvailabilityService;
 import com.motoralex.reservationservice.repo.ReservationEntity;
 import com.motoralex.reservationservice.repo.ReservationRepository;
 import com.motoralex.reservationservice.repo.ReservationStatus;
@@ -18,11 +19,12 @@ import java.util.*;
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
-
     private static final Logger logger = LoggerFactory.getLogger(ReservationService.class);
+    private final ReservationAvailabilityService availabilityService;
 
-    public ReservationService(ReservationRepository reservationRepository) {
+    public ReservationService(ReservationRepository reservationRepository, ReservationAvailabilityService availabilityService) {
         this.reservationRepository = reservationRepository;
+        this.availabilityService = availabilityService;
     }
 
     public ReservationEntity findReservationById(Long id) {
@@ -107,8 +109,13 @@ public class ReservationService {
             throw new IllegalStateException("Cannot approve reservation with id " + id);
         }
 
-        var isConflict = isReservationConflict(reservation.getRoomId(), reservation.getStartDate(), reservation.getEndDate());
-        if (isConflict) {
+        var isAvailableToApproved = availabilityService.isReservationAvailable(
+                reservation.getRoomId(),
+                reservation.getStartDate(),
+                reservation.getEndDate()
+        );
+
+        if (!isAvailableToApproved) {
             throw new IllegalStateException("Cannot approve reservation because of conflict with id " + id);
         }
 
@@ -116,23 +123,4 @@ public class ReservationService {
         reservationRepository.save(reservation);
         return reservation;
     }
-
-    private boolean isReservationConflict(
-            Long roomId,
-            LocalDateTime startDate,
-            LocalDateTime endDate
-    ) {
-
-        List<Long> conflictingIds = reservationRepository.findConflictReservationIds(
-                roomId,
-                startDate,
-                endDate,
-                ReservationStatus.APPROVED);
-        if (conflictingIds.isEmpty()) {
-            return false;
-        }
-        logger.info("Conflicting reservation ids " + conflictingIds);
-        return true;
-    }
-
 }
