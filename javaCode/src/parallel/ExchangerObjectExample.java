@@ -1,4 +1,4 @@
-package example;
+package parallel;
 
 import java.util.concurrent.Exchanger;
 

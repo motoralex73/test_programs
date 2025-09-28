@@ -25,7 +25,7 @@ public class NewSobes {
 
         List<Integer> list = new ArrayList<>(map.values());
 
-        var pp = list.parallelStream()
+        var pp = list.parallelStream();
         Integer d = Collections.max(list);
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             if (Objects.equals(entry.getValue(), d)) {

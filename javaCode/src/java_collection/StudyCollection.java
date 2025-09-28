@@ -225,6 +225,7 @@ static void studyCollection() {
     collection.add("1");
     collection.add("2");
     collection.add("3");
+    collection.add(null);
     collection.remove("2");
     Iterator iterator = collection.iterator();
     while (iterator.hasNext()) System.out.print(" "+iterator.next()); System.out.println(";");
@@ -234,6 +235,10 @@ static void studyCollection() {
     Set s1 = new HashSet();    //множество
     Queue q1 = new PriorityQueue(); //очередь FIFO, LIFO (стек)
     Map m1 = new HashMap();    //коллекция ключ-значение
+
+    s1.add(null);
+    m1.put(1,null);
+    System.out.println(m1);
 
     l1.add("1");
     l1.add(collection);
@@ -256,11 +261,12 @@ static void studyCollection() {
 
 //6. Сортировка коллекций
 static public void sortCollection() {
-    Set s1 = new TreeSet();//отсортированный
+    TreeSet s1 = new TreeSet();//отсортированный
     s1.add("2");
     s1.add("5");
     s1.add("3");
     s1.add("3");
+    //s1.add(null); //нельзя nullPointerException
     for (Object o : s1) System.out.print(o+" "); System.out.println();
     Set s2 = new TreeSet();
     s2.add(new Person(4));
@@ -366,13 +372,13 @@ public static void main(String[] args) {
 //5.коллекции
     //studyCollection();
 //6.сортировка коллекций
-    //sortCollection();
+    sortCollection();
 //7.list список
     //studyList();
 //8.queue очереди
     //studyQueue();
 //9.map - ключ-значение
-    studyMap();
+    //studyMap();
 //10.Inner-классы (внутренние классы)
     //StudyCollection studyCollection = new StudyCollection();
     //studyCollection.method();
