@@ -23,11 +23,11 @@ public class PatternsFactory {
 
     static class Factory {
         public Car create(String typeOfCar) {
-            switch (typeOfCar) {
-                case "Toyota" : return new Toyota();
-                case "Audi" : return new Audi();
-                default : return null;
-            }
+            return switch (typeOfCar) {
+                case "Toyota" -> new Toyota();
+                case "Audi" -> new Audi();
+                default -> null;
+            };
         }
     }
 

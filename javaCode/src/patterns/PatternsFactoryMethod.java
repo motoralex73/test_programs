@@ -3,10 +3,15 @@ package patterns;
 //Паттерн Фабричный метод, метод для создания объекта класса (бина)
 public class PatternsFactoryMethod {
 
-    static class Person {
+    public static class Person {
         private Person() {}
         public static Person create() {
             return new Person();
+        }
+
+        @Override
+        public String toString() {
+            return "Person class";
         }
     }
 

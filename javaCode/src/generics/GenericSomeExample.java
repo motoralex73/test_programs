@@ -33,7 +33,7 @@ public class GenericSomeExample {
         //T method(List<? super generics.ChildLittle> type) { // любой наследник generics.Child, можно добавлять то, что ниже по иерархии или ==
         T method(List<? extends Parent> type) {
             System.out.println(type.toString());
-            return (T) type;
+            return (T)type;
         }
 
         public static void main(String[] args) {

@@ -17,6 +17,5 @@ public class Task_10 {
 
         String str = "ABC";
         permuteAndPrint("", str);
-
     }
 }

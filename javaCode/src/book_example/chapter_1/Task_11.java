@@ -14,7 +14,7 @@ public class Task_11 {
 
     public static void main(String[] args) {
 
-        String str = "asbddbsad";
+        String str = "asbddbsa";
         System.out.println(isPalindrome(str));
     }
 }

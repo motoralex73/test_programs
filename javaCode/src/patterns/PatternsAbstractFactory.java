@@ -1,6 +1,6 @@
 package patterns;
 
-//паттерн Фабрика фабрик
+//паттерн Абстракная Фабрика
 public class PatternsAbstractFactory {
 
     interface Car {
@@ -91,11 +91,11 @@ public class PatternsAbstractFactory {
     static class AbstractFactory {
 
         Factory createFactory(String typeOfFactory) {
-            switch (typeOfFactory) {
-                case "Car": return new CarFactory();
-                case "Tank": return new TankFactory();
-                default: return null;
-            }
+            return switch (typeOfFactory) {
+                case "Car" -> new CarFactory();
+                case "Tank" -> new TankFactory();
+                default -> null;
+            };
         }
     }
 

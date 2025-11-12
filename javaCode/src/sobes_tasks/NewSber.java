@@ -1,4 +1,4 @@
-package ibs;
+package sobes_tasks;
 
 import java.util.Optional;
 

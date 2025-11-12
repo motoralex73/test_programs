@@ -10,11 +10,7 @@ public class StringString {
         String string = new String();
         ByteBuffer directBuffer = ByteBuffer.allocateDirect(16);
 
-
-
+        System.out.println(directBuffer);
 
     }
-
-
-
 }

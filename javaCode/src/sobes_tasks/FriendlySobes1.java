@@ -1,4 +1,4 @@
-package ibs;
+package sobes_tasks;
 
 //public class FriendlySobes1 {
 //
